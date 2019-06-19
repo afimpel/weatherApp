@@ -20,7 +20,12 @@ module.exports = (req, res, next) => {
 	promiseLocation
 		.then(result => {
 			getCurrentAsync(result)
-				.then(data => res.json({data, error: false}))
+				.then(data => {
+					let weather = data.weather[0];
+					delete data.weather;
+					data.weather = weather;
+					res.json({data, error: false});
+				})
 				.catch(e => {
 					res.status = e.status;
 					res.json({data: e.message, error: true});

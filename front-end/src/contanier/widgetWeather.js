@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, Suspense} from "react";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import Listas from "./list";
@@ -8,7 +8,9 @@ import AddIcon from "@material-ui/icons/Add";
 import {makeStyles} from "@material-ui/core/styles";
 import "./GridStyle.css";
 import ExtendWeather from "./extendWeather";
-//import axios from "axios";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Divider from "@material-ui/core/Divider";
+
 let citesArray = ["Current", "London", "Paris", "Miami", "Brasilia", "Montevideo,UY", "La Habana"];
 
 const useStyles = makeStyles(theme => ({
@@ -23,28 +25,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default props => {
-	/*	const getCurrent = name => {
-		if (name === "Current") {
-			name = "";
-		} else {
-			name = "/" + name;
-		}
-		return axios.get("http://localhost:3001/v1/current" + name);
-	};
-	const getForecast = name => {
-		if (name === "Current") {
-			name = "";
-		} else {
-			name = "/" + name;
-		}
-		return axios.get("http://localhost:3001/v1/forecast" + name);
-	};*/
-
 	const classes = useStyles();
 	let [textInputBase, setInputBase] = useState("");
 	let [infoCityCurrent, setInfoCityCurrent] = useState({});
 	let [cites, setCites] = useState(citesArray);
-	let [cityInfo, setCityInfo] = useState("");
+	let [cityInfo, setCityInfo] = useState("Current");
 
 	const addCites = name => {
 		if (name !== "") {
@@ -65,10 +50,10 @@ export default props => {
 	};
 	let dense = true;
 	return (
-		<Grid container spacing={1} className={classes.cont} width="100%">
-			<Grid item xs={3} className="Grid" width="100%">
-				<div width="100%">
-					<Grid container spacing={1}>
+		<>
+			<Grid container spacing={0} className={classes.cont}>
+				<Grid item xs={3} className="Grid">
+					<Grid container spacing={0} alignItems="center" justify="space-around">
 						<Grid item xs={10}>
 							<TextField
 								className={classes.textField}
@@ -88,28 +73,35 @@ export default props => {
 								}}
 							/>
 						</Grid>
-						<Grid item xs width="100%">
+						<Grid item xs={1}>
 							<IconButton edge="end" aria-label="Delete" onClick={() => addCites(textInputBase)}>
 								<AddIcon />
 							</IconButton>
 						</Grid>
 					</Grid>
-					<List dense={dense}>
-						{cites.map((value, k) => {
-							return <Listas name={value} key={`key-${k + 1}`} fnd={delCites} click={clickSetCityInfo} />;
-						})}
-					</List>
-				</div>
+					<div>
+						<List dense={dense}>
+							{cites.map((value, k) => {
+								return <Listas name={value} key={`key-${k + 1}`} fnd={delCites} click={clickSetCityInfo} />;
+							})}
+						</List>
+						<Divider />
+					</div>
+				</Grid>
+				<>
+					<Suspense
+						fallback={
+							<Grid item xs container alignItems="center" justify="center">
+								<CircularProgress disableShrink />
+							</Grid>
+						}
+					>
+						<Grid item xs>
+							<ExtendWeather infoOrg={infoCityCurrent} name={cityInfo} />
+						</Grid>
+					</Suspense>
+				</>
 			</Grid>
-			<Grid item xs>
-				{cityInfo !== "" ? (
-					<>
-						<ExtendWeather infoOrg={infoCityCurrent} name={cityInfo} />
-					</>
-				) : (
-					"Elige Tu Ciudad para ver el Pronstico Extendio"
-				)}
-			</Grid>
-		</Grid>
+		</>
 	);
 };

@@ -35,18 +35,16 @@ export default props => {
 			.get("http://localhost:3001/v1/current" + name)
 			.then(result => {
 				let data = result.data.data;
-				setInfo2({temp: data.main.temp, description: data.weather[0].description, country: data.sys.country, ico: data.weather[0].icon});
+				setInfo2({temp: data.main.temp, description: data.weather.description, country: data.sys.country, ico: data.weather.icon});
 				setInfo(data);
 			})
 			.catch(err => {});
 	}, [nameCity]);
 
-	const lista2 = {
-		textAlign: "right",
-	};
-
 	return (
 		<ListItem button onClick={() => click(name, info)}>
+			<ListItemText primary={info.name + ", " + info2.country} secondary={info2.description} />
+			<Typography variant="h5">{info2.temp + "° C"} </Typography>
 			<ListItemAvatar>
 				<Avatar
 					alt="Remy Sharp"
@@ -56,8 +54,6 @@ export default props => {
 					}}
 				/>
 			</ListItemAvatar>
-			<Typography variant="h5">{info2.temp + "° C"} </Typography>
-			<ListItemText primary={info.name + ", " + info2.country} secondary={info2.description} style={lista2} />
 			{del ? (
 				<ListItemSecondaryAction>
 					<IconButton edge="end" aria-label="Delete" onClick={() => fnd(info.name)}>

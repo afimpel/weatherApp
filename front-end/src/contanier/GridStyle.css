@@ -1,7 +1,32 @@
 .Grid {
-	margin: 10px !important;
+	margin: 1px !important;
 	border-right: 1px solid silver;
 	overflow-y: auto;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;
+	min-height: 98vh;
+	display: flex;
+	align-items: stretch;
+	padding-top: 1rem;
+}
+.Grid2 > div {
+	height: 100%;
+	margin: 5px !important;
+	overflow-y: auto;
+	flex-direction: column;
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+}
+.Grid2 {
+	margin: 5px !important;
+	border-right: 1px solid silver;
+	overflow-y: auto;
+	flex-direction: column;
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+}
+.bigAvatar {
+	height: 60px !important;
+	text-align: right;
 }

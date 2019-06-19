@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
 		.then(result => {
 			getForecastAsync(result)
 				.then(_data => {
-					let days = 10;
+					let days = new Date().getUTCDay();
 					let dataDays = [];
 					let _dataDays = [];
 					_data.list.map(v => {
