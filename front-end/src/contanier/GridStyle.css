@@ -1,0 +1,7 @@
+.Grid {
+	margin: 10px !important;
+	border-right: 1px solid silver;
+	overflow-y: auto;
+	justify-content: center;
+	align-items: center;
+}
