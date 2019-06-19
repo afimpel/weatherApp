@@ -6,10 +6,6 @@ React-dom < 16.8
 material-ui
 ```
 
-## task list
-
-- [ ] Reoload and next City (forecast)
-
 ## Installation
 
 ```bash
