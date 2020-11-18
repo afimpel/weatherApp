@@ -1,6 +1,6 @@
 # weatherApp
 
-app beta de Weather Nodejs / Reac.js
+app de Weather Nodejs / Reac.js
 
 ## Installation
 
