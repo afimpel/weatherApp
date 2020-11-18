@@ -11,6 +11,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import axios from "axios";
 
+// @ts-ignore
 export default props => {
 	let {fnd, click, name} = props;
 	let [info, setInfo] = useState({});
