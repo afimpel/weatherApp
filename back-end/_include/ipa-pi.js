@@ -63,6 +63,7 @@ var getCityV2 = () => {
     _location ('', ['city', 'lat', 'lon', 'regionName'])
       .then (result => {
         var obj = JSON.parse (result);
+
         resolve (obj);
       })
       .catch (err => {
@@ -83,4 +84,3 @@ var location = (ip, field) => {
   });
 };
 module.exports = {location, getCity, getCityV2};
-  
