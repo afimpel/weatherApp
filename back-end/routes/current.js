@@ -24,8 +24,6 @@ module.exports = (req, res, next) => {
   });
   promiseLocation
     .then (result => {
-      console.log ('obj :>> ', result);
-
       getCurrentAsync (result)
         .then (data => {
           let weather = data.weather[0];
